@@ -1,0 +1,1 @@
+# Max-Series-Gain-Magnitude

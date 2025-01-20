@@ -12,15 +12,10 @@ All the code is written in MATLAB. The LMI's are solved using the *Robust Contro
 The repository is organised as follows:
 - `Max_Series_Gain.m` The master script. It loops through each example, computing the maximum series gain (and # of decision variables) according to each criterion,  and displays the results.
 - `Examples.m` Defines the (A,B,C,D) matrices of the example systems.
-- `ZF_Parameters.m` Defines the Zames-Falb parameters used for each example.
-- `Circle.m` Implementation of the Circle Criterion - See Theorem 1 and Remark 3.
-- `Circle_Like.m` Implementation of the Circle-like Criterion - See Theorem 1.
-- `Popov.m` Implementation of the Popov Criterion - See Theorem 2 and Remark 4.
-- `Popov_Like1.m` Implementation of the Relaxed Popov-like Criterion - See Corollary 1.
-- `Popov_Like2.m` Implementation of the Relaxed Popov-like Criterion - See Corollary 2.
-- `Park.m` Implementation of the Park Criterion - See Theorem 2 from Reference 11.
-- `ZF.m` Implementation of the Zames-Falb Criterion - See Reference 31.
-- `Poster.pdf` Summary of the novel results used in this implementation. 
+- `LoopShift1.m` Performs the loopshift from Lurie system with ReLU nonlinearity to Lurie system with magnitude nonlinearity.
+- `LoopShift2.m` Performs the loopshift from Lurie system with magnitude nonlinearity to Lurie system with ReLU nonlinearity.
+- `Quad_Lyap.m` Implementation of the Quadratic Criterion - See Theorem 1.
+- `Lurie_type.m` Implementation of the Lurie-based Criterion - See Corollary 2.
 
 ## Getting Started
 Run `Max_Series_Gain.m` to repeat the experiments in the paper or select a subset of the examples by defining them in the *Ex_array* variable.  

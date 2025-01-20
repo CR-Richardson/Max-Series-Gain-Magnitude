@@ -1,5 +1,5 @@
 # Max-Series-Gain-Magnitude
-This code acompanies the paper [Analysis of Lurie Systems with Magnitude Nonlinearities and Connections to Neural Network Stability Analysis]() where the experimental setup is detailed in the *numerical examples* section. The code computes the maximum series gain for which global asymptotic stability is verified using various criteria. Furthermore, the number of decision variables used by the criteria are also returned to compare the complexity. This is tested on a number of example Lurie systems assumed to have repeated magnitude nonlinearities.  
+This code acompanies the paper [Analysis of Lurie Systems with Magnitude Nonlinearities and Connections to Neural Network Stability Analysis]() where the experimental setup is detailed in the *numerical examples* section. The code computes the maximum series gain for which global asymptotic stability is verified using various criteria. Furthermore, the number of decision variables used by the criteria are also returned to compare the complexity. This is tested on a number of example Lurie systems assumed to have repeated ReLU nonlinearities, where the relevant loopshift is used to allow the criteria below to be applied.  
 
 ### Authors:
 * Carl R Richardson (cr2g16@soton.ac.uk)

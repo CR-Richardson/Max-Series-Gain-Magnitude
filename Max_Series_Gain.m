@@ -6,14 +6,14 @@
 % University of Southampton
 % UK
 %
-% Date: 25/06/24
+% Date: 20/05/25
 %
 % Purpose:
 % This script builds various linear systems and computes the maximum series
 % gain (alpha) according to various criteria for which the Lurie system is
 % stable when the repeated magnitude is placed in the feebdack path. 
 % 
-% Note: Only Quadratic Criterion can handle D~=0.
+% Note: Implementation of both criteria assume D=0.
 %
 % Scripts
 % Examples:     Contains example linear systems
@@ -50,7 +50,7 @@ Alpha_Lurie = zeros(All_ex);
 decs_Quad = zeros(All_ex);
 decs_Lurie = zeros(All_ex);
 
-for i=Ex_arrayli
+for i=Ex_array
     disp(['Example ',num2str(i),' ']);
     
     disp('Quadratic Lyapunov calculations...'); 

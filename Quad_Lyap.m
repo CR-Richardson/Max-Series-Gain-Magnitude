@@ -7,10 +7,11 @@ function [alpha,data,dec]=Quad_Lyap(syst)
 % University of Southampton
 % UK
 %
-% Date: 25/06/24
+% Date: 20/05/25
 %
 % Purpose: 
 % Compute the maximum series gain (alpha) when using the Quadratic Criterion (Theorem 1).
+% Implementation assumes D = 0.
 %
 % Parameters:
 % syst: Structure containing the system matrices of an example.
@@ -44,11 +45,12 @@ alpha_up  = Gm*0.999;
 alpha_low = 0; % We know alpha = 0 is always feasible as system's are stable
 alpha     = alpha_up;
 
+eps       = 1e-6;
 %%
 % Determine alpha by repeatedly solving LMI until the largest alpha is 
 % found where LMI is feasible 
 
-while ((alpha_up - alpha_low)/alpha_up) > 0.0001
+while ((alpha_up - alpha_low)/alpha_up) > eps
     
     % Perform loopshift
     syst_ls = LoopShift1(syst, alpha);
@@ -89,7 +91,7 @@ while ((alpha_up - alpha_low)/alpha_up) > 0.0001
         for j = 1:m
             e1 = JJ(i,:); e2 = JJ(:,j);
             if i ~= j
-               lmiterm([count,1,1,V],-0.5*e1,e2,'s');
+               lmiterm([count,1,1,V],-e1,e2,'s');
                count = count+1;
             end
         end

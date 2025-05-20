@@ -7,7 +7,7 @@ function [alpha,data,dec]=Lurie_type(syst)
 % University of Southampton
 % UK
 %
-% Date: 20/06/24
+% Date: 20/05/25
 %
 % Purpose: 
 % Compute the maximum series gain (alpha) when using the relaxed (H=I)
@@ -45,11 +45,12 @@ alpha_up  = Gm*0.999;
 alpha_low = 0; % We know alpha = 0 is always feasible as system's are stable
 alpha     = alpha_up;
 
+eps       = 1e-6;
 %%
 % Determine alpha by repeatedly solving LMI until the largest alpha is 
 % found where LMI is feasible 
 
-while ((alpha_up - alpha_low)/alpha_up) > 0.0001
+while ((alpha_up - alpha_low)/alpha_up) > eps
  
     % Perform loopshift with argument
     syst_ls = LoopShift1(syst,alpha);
@@ -69,7 +70,7 @@ while ((alpha_up - alpha_low)/alpha_up) > 0.0001
     Q22 = lmivar(1,[m,1]);
     
     % LMI
-    lmiterm([1,1,1,P],A',1,'s');
+    lmiterm([1,1,1,P],1,A,'s');
     lmiterm([1,1,1,L1],C',C*A,'s');
     lmiterm([1,1,1,L2],C',C*A,'s');
     lmiterm([1,1,1,V],-C',C,'s');
@@ -80,8 +81,8 @@ while ((alpha_up - alpha_low)/alpha_up) > 0.0001
     lmiterm([1,1,2,L2],C',C*B);
     lmiterm([1,1,2,-V],-C',1);
     lmiterm([1,1,2,V],C',1);
-    lmiterm([1,1,2,Q22],2*C',1);
-    lmiterm([1,1,2,Q13],-C',1);
+    lmiterm([1,1,2,-Q22],2*C',1);
+    lmiterm([1,1,2,-Q13],-C',1);
     lmiterm([1,1,2,L1],A'*C',1);
     lmiterm([1,1,2,L2],-A'*C',1); 
     
@@ -97,10 +98,11 @@ while ((alpha_up - alpha_low)/alpha_up) > 0.0001
     
     % L1 > 0
     lmiterm([3,1,1,L1],-1,1);
-    lmiterm([3,1,1,0],eye(m)*0.0001);   % Add extra term to force L1 > \epsilon > 0
+    lmiterm([3,1,1,0], eye(m)*0.0001);   % Add extra term to force L1 > \epsilon > 0
     
     % L2 > 0
     lmiterm([4,1,1,L2],-1,1);
+    lmiterm([4,1,1,0], eye(m)*0.0001);   % Add extra term to force L2 > \epsilon > 0
     
     
     % V: Metzler matrix conditions

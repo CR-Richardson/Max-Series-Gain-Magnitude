@@ -5,7 +5,7 @@
 % University of Southampton
 % UK
 %
-% Date: 15/05/23
+% Date: 20/05/25
 %
 % Purpose: 
 % Script containing the example linear systems for the max. series gain

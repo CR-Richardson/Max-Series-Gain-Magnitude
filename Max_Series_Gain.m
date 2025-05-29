@@ -45,10 +45,12 @@ All_ex = 1:Total_Ex; % All example systems
 % Arrays for storing the maximum series gain (alpha) for each example.
 Alpha_Quad = zeros(All_ex);
 Alpha_Lurie = zeros(All_ex);
+Alpha_SGT = zeros(All_ex);
 
 % Arrays for storing the # of decision variables for each example.
 decs_Quad = zeros(All_ex);
 decs_Lurie = zeros(All_ex);
+decs_SGT = zeros(All_ex);
 
 for i=Ex_array
     disp(['Example ',num2str(i),' ']);
@@ -58,24 +60,27 @@ for i=Ex_array
 
     disp('Lurie-type Lyapunov (H=I) calculations...'); 
     [Alpha_Lurie(i), data2(i), decs_Lurie(i)] = Lurie_type(Syst{i});
+
+    disp('Small Gain Theorem calculations...'); 
+    [Alpha_SGT(i), data3(i), decs_SGT(i)] = SGT(Syst{i});
 end
 
 %% Display max series gain
 
 disp(' ');
 disp('Max. series gain');
-title_str=['        Example', '    Quadratic', '   Lurie-type'];
-mat_data =[Ex_array' Alpha_Quad(Ex_array)' Alpha_Lurie(Ex_array)'];
-fprintf('%15s %15s %15s\n',title_str);
+title_str=['        Example', '    Quadratic', '   Lurie-type', '          SGT'];
+mat_data =[Ex_array' Alpha_Quad(Ex_array)' Alpha_Lurie(Ex_array)' Alpha_SGT(Ex_array)'];
+fprintf('%15s %15s %15s %15s\n',title_str);
 disp(' ');
-fprintf('%15d %14.4f %14.4f\n',mat_data');
+fprintf('%15d %14.4f %14.4f %14.4f\n',mat_data');
 
 %% Display # of decision variables
 
 disp(' ');
 disp('# of decision variables');
-title_str=['        Example', '    Quadratic', '   Lurie-type'];
-mat_data =[Ex_array' decs_Quad(Ex_array)' decs_Lurie(Ex_array)'];
-fprintf('%15s %15s %15s\n',title_str);
+title_str=['        Example', '    Quadratic', '   Lurie-type', '          SGT'];
+mat_data =[Ex_array' decs_Quad(Ex_array)' decs_Lurie(Ex_array)' decs_SGT(Ex_array)'];
+fprintf('%15s %15s %15s %15s\n',title_str);
 disp(' ');
-fprintf('%15d %14.0f %14.0f\n',mat_data');
+fprintf('%15d %14.0f %14.0f %14.0f\n',mat_data');

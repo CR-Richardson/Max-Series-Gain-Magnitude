@@ -16,6 +16,7 @@ The repository is organised as follows:
 - `LoopShift2.m` Performs the loopshift from Lurie system with magnitude nonlinearity to Lurie system with ReLU nonlinearity.
 - `Quad_Lyap.m` Implementation of the Quadratic Criterion - See Theorem 1.
 - `Lurie_type.m` Implementation of the Lurie-based Criterion - See Corollary 2.
+- `SGT.m` Implementation of the Small Gain Theorem - See Lemma 6.5, Reference 1.
 - `Aizerman.m` Computes the Nyquist gain (based on the Aizerman Conjecture) for each example.
 
 ## Getting Started

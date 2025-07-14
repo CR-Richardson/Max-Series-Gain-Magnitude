@@ -62,16 +62,16 @@ while ((alpha_up - alpha_low)/alpha_up) > eps
     setlmis([]);
     
     P   = lmivar(1,[n,1]);
-    k = 1.0; % sector bound
+    V = lmivar(1,kron([1,0],ones(m,1)));
     
     % LMI
     lmiterm([1,1,1,P],A',1,'s');
-    lmiterm([1,1,1,0],k*(C'*C) ); 
+    lmiterm([1,1,1,V],-0.5*C',C,'s');
     
     lmiterm([1,1,2,P],1,B);
     
-    lmiterm([1,2,2,0],-k);
-    
+    lmiterm([1,2,2,V],1,1);
+
     % P > 0
     lmiterm([2,1,1,P],-1,1);
     
@@ -98,10 +98,12 @@ if alpha<1e-9
     disp('Solution cannot be found!');
     dec       =  decnbr(LMISYS); % returns number of decision varibles
     data.P    =  nan;
+    data.V    =  nan;
     alpha     =  nan;
 else
     dec       =  decnbr(LMISYS); % returns number of decision varibles
     data.P    =  dec2mat(LMISYS,xfeas,P);
+    data.V    =  dec2mat(LMISYS,xfeas,V);
 end
 
 end

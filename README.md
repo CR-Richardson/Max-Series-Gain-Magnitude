@@ -1,15 +1,17 @@
 # Max-Series-Gain-Magnitude
-This code acompanies the paper [Analysis of Lurie Systems with Magnitude Nonlinearities and Connections to Neural Network Stability Analysis]() where the experimental setup is detailed in the *numerical examples* section. The code computes the maximum series gain for which global asymptotic stability is verified using two of the criteria presented in the paper. Furthermore, the number of decision variables used by the criteria is also returned to compare the complexity. The criteria are tested on a number of example Lurie systems assumed to have repeated ReLU nonlinearities, where the relevant loopshift is used to allow the criteria below to be applied. Implementations of the other criteria can be found in the repository [Max-Series-Gain](https://github.com/CR-Richardson/Max-Series-Gain).
+This respository was first developed to acompany the paper [Analysis of Lurie Systems with Magnitude Nonlinearities and Connections to Neural Network Stability Analysis]() where the experimental setup is detailed in the *numerical examples* section. The code computes the maximum series gain for which global asymptotic stability is verified using various criteria. Furthermore, the number of decision variables used by the criteria is also returned to compare the complexity. The criteria are tested on a number of example Lurie systems assumed to have repeated ReLU nonlinearities, where the relevant loopshift is used to allow the criteria below to be applied. Implementations of the other criteria can be found in the repository [Max-Series-Gain](https://github.com/CR-Richardson/Max-Series-Gain). The code associated with this paper was developed using MATLAB's *Robust Control Toolbox* and the LMIs were solved using *LMI Lab*. This code is contained in the `LMI_Toolbox` directory.
+
+Since then, a second, more efficient implementation has been developed using *YALMIP*, to pose the problems, and *MOSEK*, to solve the LMIs. This implementation is contained in the `YALMIP_MOSEK` directory and additionally demonstrates the criteria on some higher dimensional Hopfield network examples, which were intractable with the previous implementation.
 
 ### Authors:
 * Carl R Richardson (cr2g16@soton.ac.uk)
 * Matthew C Turner (m.c.turner@soton.ac.uk)
 
 ## Prerequisites
-All the code is written in MATLAB. The LMI's are solved using the *Robust Control Toolbox* which must be installed as an add-on.
+All the code is written in MATLAB. The `LMI_Toolbox` implementation requires the *Robust Control Toolbox* to be installed as a MATLAB add-on whereas the `YALMIP_MOSEK` implementation requires [YALMIP](https://yalmip.github.io/download/) and [MOSEK](https://www.mosek.com/) to be installed.
 
 ## Overview
-The repository is organised as follows:
+The following file structure is used within the `LMI_Toolbox` and `YALMIP_MOSEK` directories:
 - `Max_Series_Gain.m` The master script. It loops through each example, computing the maximum series gain (and # of decision variables) according to each criterion,  and displays the results.
 - `Examples.m` Defines the (A,B,C,D) matrices of the example systems.
 - `LoopShift1.m` Performs the loopshift from Lurie system with ReLU nonlinearity to Lurie system with magnitude nonlinearity.
